@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -33,14 +35,16 @@ struct HomeView: View {
                             .foregroundStyle(.white.opacity(0.9))
                         
                         HStack(alignment: .bottom) {
-                            Text("$ 100,000.00")
+                            Text(viewModel.currentPrice)
                                 .font(.system(size: 38, weight: .heavy, design: .rounded))
                                 .foregroundStyle(.white)
+                                .redacted(reason: viewModel.isLoading ? .placeholder : [])
                             
-                            Text("+ 2.4%")
+                            Text(viewModel.priceChange)
                                 .font(.headline)
-                                .foregroundStyle(.green)
+                                .foregroundStyle(viewModel.isPositiveChange ? .green : .red)
                                 .padding(.bottom, 5)
+                                .redacted(reason: viewModel.isLoading ? .placeholder : [])
                         }
                     }
                     .padding(25)
@@ -65,11 +69,16 @@ struct HomeView: View {
                     
                     // Botão de Ação Modernizado
                     Button(action: {
-                        print("Chamando API...")
+                        viewModel.loadBitcoinData()
                     }) {
                         HStack {
-                            Image(systemName: "arrow.triangle.2.circlepath")
-                            Text("Atualizar Cotação")
+                            if viewModel.isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            } else {
+                                Image(systemName: "arrow.triangle.2.circlepath")
+                            }
+                            Text(viewModel.isLoading ? "A atualizar..." : "Atualizar Cotação")
                         }
                         .font(.headline)
                         .foregroundStyle(.white)
@@ -78,6 +87,7 @@ struct HomeView: View {
                         .background(Color(uiColor: .systemGray6))
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
+                    .disabled(viewModel.isLoading) // Agora sim, no lugar certo!
                     .padding(.horizontal)
                     .padding(.top, 10)
                     
@@ -86,11 +96,14 @@ struct HomeView: View {
             }
             .background(Color.black.ignoresSafeArea())
             .navigationBarHidden(true)
+            .task { // O GATILHO MÁGICO
+                viewModel.loadBitcoinData()
+            }
         }
     }
 }
 
-// COMPONENTE REUTILIZÁVEL: Mostra a sua habilidade em componentizar a UI
+// COMPONENTE REUTILIZÁVEL
 struct StatCard: View {
     var title: String
     var value: String

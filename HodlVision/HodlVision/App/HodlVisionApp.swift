@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct HodlVisionApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            MainTabView()
+            
         }
+        .modelContainer(for: Contribution.self)
     }
 }
+

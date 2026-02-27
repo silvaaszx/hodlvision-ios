@@ -27,3 +27,8 @@ O projeto foi construído seguindo as melhores práticas do ecossistema Apple, f
 1. Clone este repositório:
    ```bash
    git clone [https://github.com/silvaaszx/hodlvision-ios.git](https://github.com/silvaaszx/hodlvision-ios.git)
+
+   👨‍💻 Autor
+Desenvolvido por Matheus Silva
+
+GitHub: @silvaaszx

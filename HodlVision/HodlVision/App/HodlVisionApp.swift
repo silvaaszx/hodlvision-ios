@@ -12,7 +12,7 @@ import SwiftData
 struct HodlVisionApp: App {
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            LockView()
             
         }
         .modelContainer(for: Contribution.self)

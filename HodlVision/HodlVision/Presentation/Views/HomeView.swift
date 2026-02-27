@@ -7,10 +7,9 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 25) {
-                    
-                    // Cabeçalho (Header)
+                    // Header Pessoal
                     HStack {
-                        VStack(alignment: .leading, spacing: 4) {
+                        VStack(alignment: .leading) {
                             Text("Olá, Matheus")
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
@@ -20,114 +19,97 @@ struct HomeView: View {
                         }
                         Spacer()
                         Image(systemName: "bitcoinsign.circle.fill")
-                            .resizable()
-                            .frame(width: 45, height: 45)
+                            .font(.largeTitle)
                             .foregroundStyle(.orange)
-                            .shadow(color: .orange.opacity(0.3), radius: 5, x: 0, y: 3)
                     }
                     .padding(.horizontal)
-                    .padding(.top, 10)
                     
-                    // Card Principal de Preço
-                    VStack(alignment: .leading, spacing: 15) {
+                    // Card Principal (Preço)
+                    VStack(alignment: .leading, spacing: 10) {
                         Text("Preço Atual (BTC)")
                             .font(.headline)
-                            .foregroundStyle(.white.opacity(0.9))
+                            .foregroundStyle(.white.opacity(0.8))
                         
-                        HStack(alignment: .bottom) {
-                            Text(viewModel.currentPrice)
-                                .font(.system(size: 38, weight: .heavy, design: .rounded))
+                        if viewModel.isLoading && viewModel.currentPrice == 0 {
+                            ProgressView()
+                                .tint(.white)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        } else if let errorMessage = viewModel.errorMessage {
+                            Text(errorMessage)
+                                .foregroundStyle(.red)
+                                .bold()
+                        } else {
+                            Text(viewModel.currentPrice, format: .currency(code: "USD"))
+                                .font(.system(size: 42, weight: .heavy, design: .rounded))
                                 .foregroundStyle(.white)
-                                .redacted(reason: viewModel.isLoading ? .placeholder : [])
-                            
-                            Text(viewModel.priceChange)
-                                .font(.headline)
-                                .foregroundStyle(viewModel.isPositiveChange ? .green : .red)
-                                .padding(.bottom, 5)
-                                .redacted(reason: viewModel.isLoading ? .placeholder : [])
+                                .contentTransition(.numericText()) // Animação suave nativa
                         }
                     }
-                    .padding(25)
+                    .padding(.vertical, 30)
+                    .padding(.horizontal, 25)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(
                         LinearGradient(
-                            gradient: Gradient(colors: [Color.orange.opacity(0.9), Color.orange.opacity(0.5)]),
+                            colors: [.orange.opacity(0.9), .orange.opacity(0.5)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                    .shadow(color: .orange.opacity(0.2), radius: 10, x: 0, y: 5)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .shadow(color: .orange.opacity(0.3), radius: 15, x: 0, y: 8)
                     .padding(.horizontal)
                     
-                    // Grid de Estatísticas Secundárias
+                    // Cards Secundários (Variação e Market Cap ao vivo)
                     HStack(spacing: 15) {
-                        StatCard(title: "Variação 24h", value: "+ $ 2,400", icon: "arrow.up.right.circle.fill", color: .green)
-                        StatCard(title: "Market Cap", value: "$ 1.9 T", icon: "chart.pie.fill", color: .blue)
-                    }
-                    .padding(.horizontal)
-                    
-                    // Botão de Ação Modernizado
-                    Button(action: {
-                        viewModel.loadBitcoinData()
-                    }) {
-                        HStack {
-                            if viewModel.isLoading {
-                                ProgressView()
-                                    .tint(.white)
-                            } else {
-                                Image(systemName: "arrow.triangle.2.circlepath")
+                        // Card de Variação
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Image(systemName: viewModel.priceChange24h >= 0 ? "arrow.up.right.circle.fill" : "arrow.down.right.circle.fill")
+                                    .foregroundStyle(viewModel.priceChange24h >= 0 ? .green : .red)
+                                Text("Variação 24h")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
                             }
-                            Text(viewModel.isLoading ? "A atualizar..." : "Atualizar Cotação")
+                            
+                            Text("\(viewModel.priceChange24h >= 0 ? "+" : "")\(viewModel.priceChange24h, format: .number.precision(.fractionLength(2)))%")
+                                .font(.headline)
+                                .foregroundStyle(viewModel.priceChange24h >= 0 ? .green : .red)
                         }
-                        .font(.headline)
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(uiColor: .systemGray6))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color(.systemGray6))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        
+                        // Card de Market Cap
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Image(systemName: "chart.pie.fill")
+                                    .foregroundStyle(.blue)
+                                Text("Market Cap")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            Text(viewModel.marketCap, format: .currency(code: "USD").notation(.compactName))
+                                .font(.headline)
+                                .foregroundStyle(.primary)
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color(.systemGray6))
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
-                    .disabled(viewModel.isLoading) // Agora sim, no lugar certo!
                     .padding(.horizontal)
-                    .padding(.top, 10)
                     
                     Spacer()
                 }
+                .padding(.top)
             }
-            .background(Color.black.ignoresSafeArea())
-            .navigationBarHidden(true)
-            .task { // O GATILHO MÁGICO
-                viewModel.loadBitcoinData()
+            // A mágica acontece aqui: atualiza sozinho ao abrir a tela!
+            .task {
+                await viewModel.fetchPrice()
             }
         }
-    }
-}
-
-// COMPONENTE REUTILIZÁVEL
-struct StatCard: View {
-    var title: String
-    var value: String
-    var icon: String
-    var color: Color
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Image(systemName: icon)
-                    .foregroundStyle(color)
-                    .font(.title3)
-                Text(title)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            Text(value)
-                .font(.headline)
-                .fontWeight(.bold)
-        }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(uiColor: .systemGray6))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 

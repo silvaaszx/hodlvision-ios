@@ -3,11 +3,13 @@ import SwiftData
 
 @Model
 final class Contribution {
-    var amount: Double
+    var fiatAmount: Double
+    var btcAmount: Double
     var date: Date
     
-    init(amount: Double, date: Date = Date()) {
-        self.amount = amount
+    init(fiatAmount: Double, btcAmount: Double, date: Date = Date()) {
+        self.fiatAmount = fiatAmount
+        self.btcAmount = btcAmount
         self.date = date
     }
 }

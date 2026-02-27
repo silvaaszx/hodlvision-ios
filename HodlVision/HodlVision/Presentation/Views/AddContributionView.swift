@@ -5,14 +5,20 @@ struct AddContributionView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     
-    @State private var amount: String = ""
+    @State private var fiatAmount: String = ""
+    @State private var btcAmount: String = ""
     
     var body: some View {
         NavigationStack {
             Form {
                 Section(header: Text("Detalhes do Aporte")) {
-                    TextField("Valor do Aporte ($)", text: $amount)
+                    TextField("Valor investido (US$)", text: $fiatAmount)
                         .keyboardType(.decimalPad)
+                        .foregroundStyle(.orange)
+                    
+                    TextField("Fração de BTC comprada", text: $btcAmount)
+                        .keyboardType(.decimalPad)
+                        .foregroundStyle(.orange)
                 }
             }
             .navigationTitle("Novo Aporte")
@@ -23,10 +29,11 @@ struct AddContributionView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Salvar") {
-                        // Converte o texto para número e salva no banco!
-                        let formattedAmount = amount.replacingOccurrences(of: ",", with: ".")
-                        if let value = Double(formattedAmount) {
-                            let newContribution = Contribution(amount: value)
+                        let formattedFiat = fiatAmount.replacingOccurrences(of: ",", with: ".")
+                        let formattedBtc = btcAmount.replacingOccurrences(of: ",", with: ".")
+                        
+                        if let fiatValue = Double(formattedFiat), let btcValue = Double(formattedBtc) {
+                            let newContribution = Contribution(fiatAmount: fiatValue, btcAmount: btcValue)
                             modelContext.insert(newContribution)
                             dismiss()
                         }

@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		827F946E2F513BFA00867955 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827F946D2F513BFA00867955 /* WidgetKit.framework */; };
+		827F94702F513BFA00867955 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 827F946F2F513BFA00867955 /* SwiftUI.framework */; };
+		827F947D2F513BFB00867955 /* HodlVisionWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 827F946B2F513BFA00867955 /* HodlVisionWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8267B1992F50DCBD00A4C084 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,13 +27,47 @@
 			remoteGlobalIDString = 8267B18A2F50DCBC00A4C084;
 			remoteInfo = HodlVision;
 		};
+		827F947B2F513BFB00867955 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8267B1832F50DCBC00A4C084 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 827F946A2F513BFA00867955;
+			remoteInfo = HodlVisionWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		827F94822F513BFB00867955 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				827F947D2F513BFB00867955 /* HodlVisionWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8267B18B2F50DCBC00A4C084 /* HodlVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HodlVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8267B1982F50DCBD00A4C084 /* HodlVisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HodlVisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8267B1A22F50DCBD00A4C084 /* HodlVisionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HodlVisionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		827F946B2F513BFA00867955 /* HodlVisionWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HodlVisionWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		827F946D2F513BFA00867955 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		827F946F2F513BFA00867955 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		827F947E2F513BFB00867955 /* Exceptions for "HodlVisionWidget" folder in "HodlVisionWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 827F946A2F513BFA00867955 /* HodlVisionWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8267B18D2F50DCBC00A4C084 /* HodlVision */ = {
@@ -43,6 +83,14 @@
 		8267B1A52F50DCBD00A4C084 /* HodlVisionUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HodlVisionUITests;
+			sourceTree = "<group>";
+		};
+		827F94712F513BFA00867955 /* HodlVisionWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				827F947E2F513BFB00867955 /* Exceptions for "HodlVisionWidget" folder in "HodlVisionWidgetExtension" target */,
+			);
+			path = HodlVisionWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +117,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		827F94682F513BFA00867955 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				827F94702F513BFA00867955 /* SwiftUI.framework in Frameworks */,
+				827F946E2F513BFA00867955 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +135,8 @@
 				8267B18D2F50DCBC00A4C084 /* HodlVision */,
 				8267B19B2F50DCBD00A4C084 /* HodlVisionTests */,
 				8267B1A52F50DCBD00A4C084 /* HodlVisionUITests */,
+				827F94712F513BFA00867955 /* HodlVisionWidget */,
+				827F946C2F513BFA00867955 /* Frameworks */,
 				8267B18C2F50DCBC00A4C084 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +147,18 @@
 				8267B18B2F50DCBC00A4C084 /* HodlVision.app */,
 				8267B1982F50DCBD00A4C084 /* HodlVisionTests.xctest */,
 				8267B1A22F50DCBD00A4C084 /* HodlVisionUITests.xctest */,
+				827F946B2F513BFA00867955 /* HodlVisionWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		827F946C2F513BFA00867955 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				827F946D2F513BFA00867955 /* WidgetKit.framework */,
+				827F946F2F513BFA00867955 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,10 +171,12 @@
 				8267B1872F50DCBC00A4C084 /* Sources */,
 				8267B1882F50DCBC00A4C084 /* Frameworks */,
 				8267B1892F50DCBC00A4C084 /* Resources */,
+				827F94822F513BFB00867955 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				827F947C2F513BFB00867955 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8267B18D2F50DCBC00A4C084 /* HodlVision */,
@@ -163,6 +234,28 @@
 			productReference = 8267B1A22F50DCBD00A4C084 /* HodlVisionUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		827F946A2F513BFA00867955 /* HodlVisionWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 827F947F2F513BFB00867955 /* Build configuration list for PBXNativeTarget "HodlVisionWidgetExtension" */;
+			buildPhases = (
+				827F94672F513BFA00867955 /* Sources */,
+				827F94682F513BFA00867955 /* Frameworks */,
+				827F94692F513BFA00867955 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				827F94712F513BFA00867955 /* HodlVisionWidget */,
+			);
+			name = HodlVisionWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = HodlVisionWidgetExtension;
+			productReference = 827F946B2F513BFA00867955 /* HodlVisionWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +277,9 @@
 						CreatedOnToolsVersion = 26.0.1;
 						TestTargetID = 8267B18A2F50DCBC00A4C084;
 					};
+					827F946A2F513BFA00867955 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
 				};
 			};
 			buildConfigurationList = 8267B1862F50DCBC00A4C084 /* Build configuration list for PBXProject "HodlVision" */;
@@ -203,6 +299,7 @@
 				8267B18A2F50DCBC00A4C084 /* HodlVision */,
 				8267B1972F50DCBD00A4C084 /* HodlVisionTests */,
 				8267B1A12F50DCBD00A4C084 /* HodlVisionUITests */,
+				827F946A2F513BFA00867955 /* HodlVisionWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +320,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8267B1A02F50DCBD00A4C084 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		827F94692F513BFA00867955 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +357,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		827F94672F513BFA00867955 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +376,11 @@
 			isa = PBXTargetDependency;
 			target = 8267B18A2F50DCBC00A4C084 /* HodlVision */;
 			targetProxy = 8267B1A32F50DCBD00A4C084 /* PBXContainerItemProxy */;
+		};
+		827F947C2F513BFB00867955 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 827F946A2F513BFA00867955 /* HodlVisionWidgetExtension */;
+			targetProxy = 827F947B2F513BFB00867955 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -400,6 +516,7 @@
 				DEVELOPMENT_TEAM = FZSPRU99F2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Precisamos do Face ID para proteger seu patrimônio e simulações.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +549,7 @@
 				DEVELOPMENT_TEAM = FZSPRU99F2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Precisamos do Face ID para proteger seu patrimônio e simulações.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -538,6 +656,66 @@
 			};
 			name = Release;
 		};
+		827F94802F513BFB00867955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FZSPRU99F2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HodlVisionWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HodlVisionWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = matheussilva.HodlVision.HodlVisionWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		827F94812F513BFB00867955 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FZSPRU99F2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HodlVisionWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HodlVisionWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = matheussilva.HodlVision.HodlVisionWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -573,6 +751,15 @@
 			buildConfigurations = (
 				8267B1B32F50DCBD00A4C084 /* Debug */,
 				8267B1B42F50DCBD00A4C084 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		827F947F2F513BFB00867955 /* Build configuration list for PBXNativeTarget "HodlVisionWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				827F94802F513BFB00867955 /* Debug */,
+				827F94812F513BFB00867955 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

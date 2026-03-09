@@ -150,17 +150,18 @@ struct WalletView: View {
     }
     
     private func fetchCurrentPrice() async {
-        isLoadingPrice = true
-        do {
-            let data = try await NetworkService.shared.fetchBitcoinPrice()
-            currentBtcPrice = data.usd
-            isLoadingPrice = false
-        } catch {
-            print("Erro ao buscar preço na Carteira")
-            isLoadingPrice = false
+            isLoadingPrice = true
+            do {
+                // 1. Chama a função com o nome novo
+                let data = try await NetworkService.shared.fetchBitcoinData()
+                // 2. Agora acessamos a propriedade '.price' do nosso novo modelo
+                currentBtcPrice = data.price
+                isLoadingPrice = false
+            } catch {
+                print("Erro ao buscar preço na Carteira")
+                isLoadingPrice = false
+            }
         }
-    }
-    
     private func deleteContributions(offsets: IndexSet) {
         for index in offsets {
             modelContext.delete(contributions[index])
